@@ -1,15 +1,17 @@
 ---
 layout: page
-title: About
+title: Sobre mi
 permalink: /about/
 ---
 
-Some information about you!
+Ingeniero del Dato 
 
-### More Information
+### Más información
 
-A place to include any other types of information that you'd like to include about yourself.
+Apasionado de las tecnologías del dato.
+Este blog va a estar basado en la investigación de técnologias como: Redpanda, ScyllaDB, Flink, Spark, Beam...
+Y sobre distinto proyectos de configuracion en distintos lenguajes: Go, Python...
 
 ### Contact me
 
-[email@domain.com](mailto:email@domain.com)
+[carlosmartcarr@gmail.com](mailto:carlosmartcarr@gmail.com)
