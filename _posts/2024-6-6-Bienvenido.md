@@ -14,5 +14,8 @@ Principalmente postearé sobre tecnologias como:
 -  Spark
 -  Beam
 -  Benthos
+-  ElasticSearch
+-  Manticore Search
+-  MinIO
 
 Mi intención es crear ciertas Pruebas de concepto y compartirlas en este blog.
