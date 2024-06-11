@@ -18,7 +18,7 @@ Vamos a explicar el ciclo de procesamiento de los dos códigos por partes:
 
 1. El codigo de scala es bastante sencillo. Primero se definen ciertas variables mutables como el `JavaSparkContext` y el `SparkConf`. Se declaran asi en vez de inmutables porque luego se acceden a ellas con los metodos `getJsc()` y `getConf()`, que los necesitaremos en python, de ahi que se deba declarar todo fuera del main.
 
-``` java
+``` scala
 def getJsc(): JavaSparkContext = jsc
 def getConf(): SparkConf = conf
 var jsc: JavaSparkContext = _ 
@@ -27,7 +27,7 @@ var conf: SparkConf = _
 
 2. Seguidamente en el main instanciamos la `SparkSession` que vamos a utilizar y con el contexto de esta sesion creamos el contexto Java, y con este su `SparkConf` y se asignan ambos a las variables antes instanciadas. Despues vamos a crear una Vista temporal en spark SQL con datos randoms:
 
-```
+``` scala
 val spark = SparkSession.builder().appName("Spark Python Runner")
                     .master("local[1]")
                     .getOrCreate()
@@ -43,7 +43,7 @@ df.createOrReplaceTempView("table")
 
 3. Una vez creada la vista ejecutamos el codigo de python:
 
-```
+``` scala
 PythonRunner.main(Array(
       "src/main/python/example.py",
       "src/main/python/example.py"
@@ -67,7 +67,7 @@ Ya puede usar pyspark como siempre, lo bueno es que ahora tanto la sesion de sca
 
 5. Leemos la tabla "table" que creamos anteriormente en scala. Como comparten la sesion se puede acceder a ella desde python. Creamos una nueva columna y reemplazamos la vista:
 
-```
+``` python
 df = spark.sql("SELECT * FROM table")
 df_processed = df.withColumn("len", length('language').alias('len'))
 df_processed.createOrReplaceTempView("table")
@@ -75,7 +75,7 @@ df_processed.createOrReplaceTempView("table")
 
 6. Finalmente, creamos un udf que simplemente mide la longitud del string con pandas_udf y la registramos en spark SQL:
 
-```
+``` python
 @pandas_udf(IntegerType())
 def slen(s: pd.Series) -> pd.Series:
     return s.str.len()
@@ -85,14 +85,14 @@ spark.udf.register("slen", slen)
 
 7. Al estar registrada esta última parte se puede hacer tanto en python como en scala, aunque nosotros la hemos hecho en python. Simplemente llamamos a la nueva funcion con Spark SQL y reemplazamos de nuevo la vista:
 
-```
+``` python
 df_udf = spark.sql("SELECT language, users_count, len, slen(language) as udf_len FROM table")
 df_udf.createOrReplaceTempView("table")
 ```
 
 8. Ahora la última parte del ejemplo es volver a hacer un select con scala para ver que la tabla contiene todos los cambios realizados con python:
 
-```
+``` scala
 spark.sql("SELECT * FROM table").show()
 ```
 
