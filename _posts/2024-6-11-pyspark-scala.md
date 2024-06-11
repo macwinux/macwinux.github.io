@@ -19,10 +19,10 @@ Vamos a explicar el ciclo de procesamiento de los dos códigos por partes:
 1. El codigo de scala es bastante sencillo. Primero se definen ciertas variables mutables como el `JavaSparkContext` y el `SparkConf`. Se declaran asi en vez de inmutables porque luego se acceden a ellas con los metodos `getJsc()` y `getConf()`, que los necesitaremos en python, de ahi que se deba declarar todo fuera del main.
 
 ```
-  def getJsc(): JavaSparkContext = jsc
-  def getConf(): SparkConf = conf
-  var jsc: JavaSparkContext = _ 
-  var conf: SparkConf = _
+def getJsc(): JavaSparkContext = jsc
+def getConf(): SparkConf = conf
+var jsc: JavaSparkContext = _ 
+var conf: SparkConf = _
 ```
 
 2. Seguidamente en el main instanciamos la `SparkSession` que vamos a utilizar y con el contexto de esta sesion creamos el contexto Java, y con este su `SparkConf` y se asignan ambos a las variables antes instanciadas. Despues vamos a crear una Vista temporal en spark SQL con datos randoms:
@@ -53,13 +53,13 @@ PythonRunner.main(Array(
 4. La parte de pyspark que busca la sesion activa por el codigo scala:
 
 ```
-    gateway = pyspark.java_gateway.launch_gateway()
-    java_import(gateway.jvm, "com.example.pysparkscala.PysparkScala")
-    jsc = gateway.jvm.PysparkScala.getJsc()
-    jconf = gateway.jvm.PysparkScala.getConf()
-    conf = pyspark.conf.SparkConf(True, gateway.jvm, jconf)
-    sc = pyspark.SparkContext(gateway=gateway, jsc=jsc, conf=conf)
-    spark = SparkSession(sc)
+gateway = pyspark.java_gateway.launch_gateway()
+java_import(gateway.jvm, "com.example.pysparkscala.PysparkScala")
+jsc = gateway.jvm.PysparkScala.getJsc()
+jconf = gateway.jvm.PysparkScala.getConf()
+conf = pyspark.conf.SparkConf(True, gateway.jvm, jconf)
+sc = pyspark.SparkContext(gateway=gateway, jsc=jsc, conf=conf)
+spark = SparkSession(sc)
 ```
 
 Esta parte se comunica con el codigo scala de spark mediante el java_gateway. Recoge la sesion y se instancia esta sesion con `spark = SparkSession(sc)`.
@@ -80,7 +80,7 @@ df_processed.createOrReplaceTempView("table")
 def slen(s: pd.Series) -> pd.Series:
     return s.str.len()
 
-  spark.udf.register("slen", slen)
+spark.udf.register("slen", slen)
 ```
 
 7. Al estar registrada esta última parte se puede hacer tanto en python como en scala, aunque nosotros la hemos hecho en python. Simplemente llamamos a la nueva funcion con Spark SQL y reemplazamos de nuevo la vista:
