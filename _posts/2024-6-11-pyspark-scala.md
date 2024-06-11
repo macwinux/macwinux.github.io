@@ -18,7 +18,7 @@ Vamos a explicar el ciclo de procesamiento de los dos códigos por partes:
 
 1. El codigo de scala es bastante sencillo. Primero se definen ciertas variables mutables como el `JavaSparkContext` y el `SparkConf`. Se declaran asi en vez de inmutables porque luego se acceden a ellas con los metodos `getJsc()` y `getConf()`, que los necesitaremos en python, de ahi que se deba declarar todo fuera del main.
 
-```
+``` java
 def getJsc(): JavaSparkContext = jsc
 def getConf(): SparkConf = conf
 var jsc: JavaSparkContext = _ 
@@ -52,7 +52,7 @@ PythonRunner.main(Array(
 
 4. La parte de pyspark que busca la sesion activa por el codigo scala:
 
-```
+``` python
 gateway = pyspark.java_gateway.launch_gateway()
 java_import(gateway.jvm, "com.example.pysparkscala.PysparkScala")
 jsc = gateway.jvm.PysparkScala.getJsc()
