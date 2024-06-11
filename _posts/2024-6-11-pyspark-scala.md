@@ -17,6 +17,7 @@ Dentro de la carpeta main se puede ver que hay dos carpetas, la carpeta con el c
 Vamos a explicar el ciclo de procesamiento de los dos códigos por partes:
 
 1. El codigo de scala es bastante sencillo. Primero se definen ciertas variables mutables como el `JavaSparkContext` y el `SparkConf`. Se declaran asi en vez de inmutables porque luego se acceden a ellas con los metodos `getJsc()` y `getConf()`, que los necesitaremos en python, de ahi que se deba declarar todo fuera del main.
+
 ```java
   def getJsc(): JavaSparkContext = jsc
   def getConf(): SparkConf = conf
@@ -25,11 +26,11 @@ Vamos a explicar el ciclo de procesamiento de los dos códigos por partes:
 ```
 
 2. Seguidamente en el main instanciamos la `SparkSession` que vamos a utilizar y con el contexto de esta sesion creamos el contexto Java, y con este su `SparkConf` y se asignan ambos a las variables antes instanciadas. Despues vamos a crear una Vista temporal en spark SQL con datos randoms:
+
 ```java
 val spark = SparkSession.builder().appName("Spark Python Runner")
                     .master("local[1]")
                     .getOrCreate()
-    
 jsc = new JavaSparkContext(spark.sparkContext)
 conf = jsc.getConf
 import spark.implicits._
@@ -41,6 +42,7 @@ df.createOrReplaceTempView("table")
 ```
 
 3. Una vez creada la vista ejecutamos el codigo de python:
+
 ```java
 PythonRunner.main(Array(
       "src/main/python/example.py",
@@ -49,6 +51,7 @@ PythonRunner.main(Array(
 ```
 
 4. La parte de pyspark que busca la sesion activa por el codigo scala:
+
 ```python
     gateway = pyspark.java_gateway.launch_gateway()
     java_import(gateway.jvm, "com.example.pysparkscala.PysparkScala")
@@ -58,6 +61,7 @@ PythonRunner.main(Array(
     sc = pyspark.SparkContext(gateway=gateway, jsc=jsc, conf=conf)
     spark = SparkSession(sc)
 ```
+
 Esta parte se comunica con el codigo scala de spark mediante el java_gateway. Recoge la sesion y se instancia esta sesion con `spark = SparkSession(sc)`.
 Ya puede usar pyspark como siempre, lo bueno es que ahora tanto la sesion de scala como la python es la misma, y ahora lo veremos.
 
@@ -68,7 +72,9 @@ df = spark.sql("SELECT * FROM table")
 df_processed = df.withColumn("len", length('language').alias('len'))
 df_processed.createOrReplaceTempView("table")
 ```
+
 6. Finalmente, creamos un udf que simplemente mide la longitud del string con pandas_udf y la registramos en spark SQL:
+
 ```python
 @pandas_udf(IntegerType())
 def slen(s: pd.Series) -> pd.Series:
@@ -78,11 +84,14 @@ def slen(s: pd.Series) -> pd.Series:
 ```
 
 7. Al estar registrada esta última parte se puede hacer tanto en python como en scala, aunque nosotros la hemos hecho en python. Simplemente llamamos a la nueva funcion con Spark SQL y reemplazamos de nuevo la vista:
+
 ```python
 df_udf = spark.sql("SELECT language, users_count, len, slen(language) as udf_len FROM table")
 df_udf.createOrReplaceTempView("table")
 ```
+
 8. Ahora la última parte del ejemplo es volver a hacer un select con scala para ver que la tabla contiene todos los cambios realizados con python:
+
 ```java
 spark.sql("SELECT * FROM table").show()
 ```
