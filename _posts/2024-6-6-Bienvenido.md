@@ -21,4 +21,10 @@ Principalmente postearé sobre tecnologias como:
 -  [Airflow](https://airflow.apache.org/)
 -  [Knative](https://knative.dev/docs/)
 
+o lenguajes como:
+
+- Scala
+- Python
+- Golang
+
 Mi intención es crear ciertas Pruebas de concepto y compartirlas en este blog.
