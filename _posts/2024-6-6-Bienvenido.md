@@ -10,7 +10,7 @@ Principalmente postearé sobre tecnologias como:
 
 -  [Redpanda](https://redpanda.com/)
 -  [ScyllaDB](https://www.scylladb.com/)
--  [Grafana Suite](https://grafana.com/)
+-  [Grafana Suite](https://grafana.com/) 
 -  [Flink](https://flink.apache.org/)
 -  [Spark](https://spark.apache.org/)
 -  [Beam](https://beam.apache.org/)

@@ -64,3 +64,5 @@ func main() {
 }
 
 ```
+
+Este uso de las interfaces es curioso. No se si útil realmente pero es bastante curioso.
