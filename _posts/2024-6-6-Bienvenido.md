@@ -10,16 +10,10 @@ Principalmente postearé sobre tecnologias como:
 
 -  [Redpanda](https://redpanda.com/)
 -  [ScyllaDB](https://www.scylladb.com/)
--  [Grafana](https://grafana.com/)
+-  [Grafana Suite](https://grafana.com/)
 -  [Flink](https://flink.apache.org/)
 -  [Spark](https://spark.apache.org/)
 -  [Beam](https://beam.apache.org/)
--  [Benthos/Redpanda-Connect](https://docs.redpanda.com/redpanda-connect/about/)
--  [ElasticSearch](https://www.elastic.co/)
--  [MinIO](https://min.io/)
--  [Pekko](https://pekko.apache.org/)
--  [Airflow](https://airflow.apache.org/)
--  [Knative](https://knative.dev/docs/)
 
 o lenguajes como:
 
