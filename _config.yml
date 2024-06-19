@@ -122,7 +122,7 @@ author:
       icon: "fas fa-fw fa-envelope-square"
       # url: "carlosmartcarr@gmail.com"
     - label: "LinkedIn"
-      icon: "fas fa-fw fa-linkedin"
+      icon: "fab fa-brands fa-linkedin"
       url: "https://www.linkedin.com/in/carlos-mart%C3%ADnez-carre%C3%B1o-3612a9b8/"
     - label: "GitHub"
       icon: "fab fa-fw fa-github"
