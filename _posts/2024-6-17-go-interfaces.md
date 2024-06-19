@@ -2,6 +2,8 @@
 title: Curiosidades de las interfaces en go
 categories: 
   - Golang
+toc: true
+toc_label: "Índice"
 ---
 
 Varias curiosidades sobre las interfaces en go.

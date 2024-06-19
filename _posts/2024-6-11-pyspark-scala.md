@@ -4,7 +4,11 @@ categories:
   - Spark
   - Scala
   - Python
+toc: true
+toc_label: "Índice"
 ---
+
+## Presentación
 
 He querido comenzar este blog con una investigación que tuve que hacer durante un proyecto en el que trabajé. La dificultad radicaba en que queriamos hacer un producto sobre Spark que corriese código embebido sql, scala o python en un yaml.
 
@@ -16,6 +20,8 @@ Como ejemplo he dejado este repositorio de ejemplo: [repositorio](https://github
 Dentro de la carpeta main se puede ver que hay dos carpetas, la carpeta con el código python y la carpeta src del código scala que arranca la session de Spark. 
 
 Vamos a explicar el ciclo de procesamiento de los dos códigos por partes:
+
+### Parte de Scala
 
 1. El código de scala es bastante sencillo. Primero se definen ciertas variables mutables como el `JavaSparkContext` y el `SparkConf`. Se declaran asi en vez de inmutables porque luego se acceden a ellas con los metodos `getJsc()` y `getConf()`, que los necesitaremos en python, de ahi que se deba declarar todo fuera del main.
 
@@ -50,6 +56,8 @@ PythonRunner.main(Array(
       "src/main/python/example.py"
     ))
 ```
+
+### Parte de Python
 
 4. La parte de pyspark que busca la sesión activa por el código scala:
 
@@ -90,6 +98,8 @@ spark.udf.register("slen", slen)
 df_udf = spark.sql("SELECT language, users_count, len, slen(language) as udf_len FROM table")
 df_udf.createOrReplaceTempView("table")
 ```
+
+### Comprobación
 
 8. Ahora la última parte del ejemplo es volver a hacer un select con scala para ver que la tabla contiene todos los cambios realizados con python:
 
