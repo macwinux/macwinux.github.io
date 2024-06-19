@@ -122,7 +122,7 @@ author:
       icon: "fas fa-fw fa-envelope-square"
       # url: "carlosmartcarr@gmail.com"
     - label: "LinkedIn"
-      icon: "fab fa-brands fa-linkedin"
+      icon: "fab fa-fw fa-linkedin"
       url: "https://www.linkedin.com/in/carlos-mart%C3%ADnez-carre%C3%B1o-3612a9b8/"
     - label: "GitHub"
       icon: "fab fa-fw fa-github"
@@ -131,24 +131,13 @@ author:
 # Site Footer
 footer:
   links:
-    - label: "Twitter"
-      icon: "fab fa-fw fa-twitter-square"
-      # url:
-    - label: "Facebook"
-      icon: "fab fa-fw fa-facebook-square"
-      # url:
+
     - label: "GitHub"
       icon: "fab fa-fw fa-github"
-      # url:
-    - label: "GitLab"
-      icon: "fab fa-fw fa-gitlab"
-      # url:
-    - label: "Bitbucket"
-      icon: "fab fa-fw fa-bitbucket"
-      # url:
+      url: "https://github.com/macwinux"
     - label: "LinkedIn"
-      icon: "fab fa-brands fa-linkedin"
-      # url: ""
+      icon: "fab fa-fw fa-linkedin"
+      url: "https://www.linkedin.com/in/carlos-mart%C3%ADnez-carre%C3%B1o-3612a9b8/"
 
 # Reading Files
 include:
