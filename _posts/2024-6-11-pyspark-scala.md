@@ -1,5 +1,4 @@
 ---
-layout: posts
 title: PySpark en Scala
 categories: 
   - Spark
