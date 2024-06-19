@@ -4,7 +4,7 @@ title: Bienvenidos!
 ---
 
 Buenas, mi intención con este blog es ir incluyendo en el las distintas investigaciones que estoy realizando sobre distintas aplicaciones que han llamado mi atención.
-Principalmente postearé sobre tecnologias como:
+Principalmente postearé sobre tecnologías como:
 
 -  [Redpanda](https://redpanda.com/)
 -  [ScyllaDB](https://www.scylladb.com/)
@@ -19,4 +19,4 @@ o lenguajes como:
 - Python
 - Golang
 
-Mi intención es crear ciertas Pruebas de concepto y compartirlas en este blog.
+Mi intención es crear ciertas pruebas de concepto y compartirlas en este blog.

@@ -3,18 +3,18 @@ layout: posts
 title: PySpark en Scala
 ---
 
-He querido comenzar este blog con una investigación que tuve que hacer durante un proyecto en el que trabaje. La dificultad radicaba en que queriamos hacer un producto sobre Spark que corriese codigo embebido sql, scala o python en un yaml.
+He querido comenzar este blog con una investigación que tuve que hacer durante un proyecto en el que trabajé. La dificultad radicaba en que queriamos hacer un producto sobre Spark que corriese código embebido sql, scala o python en un yaml.
 
-Casi toda la lógica se escribia en Spark SQL y cuando querias hacer algo más complejo se solía utilizar los UDFs de Scala.
-El problema es que un determinado caso de uso necesitaba el uso de una libreria de python, por lo tanto modificamos el codigo de tal manera que fuese capaz de procesar tambien udfs en python (aunque no era muy eficiente).
+Casi toda la lógica se escribía en Spark SQL y cuando querías hacer algo más complejo se solía utilizar los UDFs de Scala.
+El problema es que un determinado caso de uso necesitaba el uso de una librería de python, por lo tanto modificamos el código de tal manera que fuese capaz de procesar tambien udfs en python (aunque no era muy eficiente).
 
 Como ejemplo he dejado este repositorio de ejemplo: [repositorio](https://github.com/macwinux/pyspark-in-scala).
 
-Dentro de la carpeta main se puede ver que hay dos carpetas, la carpeta con el codigo python y la carpeta src del codigo scala que arranca la session de Spark. 
+Dentro de la carpeta main se puede ver que hay dos carpetas, la carpeta con el código python y la carpeta src del código scala que arranca la session de Spark. 
 
 Vamos a explicar el ciclo de procesamiento de los dos códigos por partes:
 
-1. El codigo de scala es bastante sencillo. Primero se definen ciertas variables mutables como el `JavaSparkContext` y el `SparkConf`. Se declaran asi en vez de inmutables porque luego se acceden a ellas con los metodos `getJsc()` y `getConf()`, que los necesitaremos en python, de ahi que se deba declarar todo fuera del main.
+1. El código de scala es bastante sencillo. Primero se definen ciertas variables mutables como el `JavaSparkContext` y el `SparkConf`. Se declaran asi en vez de inmutables porque luego se acceden a ellas con los metodos `getJsc()` y `getConf()`, que los necesitaremos en python, de ahi que se deba declarar todo fuera del main.
 
 ``` scala
 def getJsc(): JavaSparkContext = jsc
@@ -23,7 +23,7 @@ var jsc: JavaSparkContext = _
 var conf: SparkConf = _
 ```
 
-2. Seguidamente en el main instanciamos la `SparkSession` que vamos a utilizar y con el contexto de esta sesion creamos el contexto Java, y con este su `SparkConf` y se asignan ambos a las variables antes instanciadas. Despues vamos a crear una Vista temporal en spark SQL con datos randoms:
+2. Seguidamente en el main instanciamos la `SparkSession` que vamos a utilizar y con el contexto de esta sesión creamos el contexto Java, y con este su `SparkConf` y se asignan ambos a las variables antes instanciadas. Despues vamos a crear una Vista temporal en spark SQL con datos randoms:
 
 ``` scala
 val spark = SparkSession.builder().appName("Spark Python Runner")
@@ -39,7 +39,7 @@ val df = rdd.toDF(columns:_*)
 df.createOrReplaceTempView("table")
 ```
 
-3. Una vez creada la vista ejecutamos el codigo de python:
+3. Una vez creada la vista ejecutamos el código de python:
 
 ``` scala
 PythonRunner.main(Array(
@@ -48,7 +48,7 @@ PythonRunner.main(Array(
     ))
 ```
 
-4. La parte de pyspark que busca la sesion activa por el codigo scala:
+4. La parte de pyspark que busca la sesión activa por el código scala:
 
 ``` python
 gateway = pyspark.java_gateway.launch_gateway()
@@ -60,10 +60,10 @@ sc = pyspark.SparkContext(gateway=gateway, jsc=jsc, conf=conf)
 spark = SparkSession(sc)
 ```
 
-Esta parte se comunica con el codigo scala de spark mediante el java_gateway. Recoge la sesion y se instancia esta sesion con `spark = SparkSession(sc)`.
-Ya puede usar pyspark como siempre, lo bueno es que ahora tanto la sesion de scala como la python es la misma, y ahora lo veremos.
+Esta parte se comunica con el código scala de spark mediante el java_gateway. Recoge la sesión y se instancia esta sesión con `spark = SparkSession(sc)`.
+Ya puede usar pyspark como siempre, lo bueno es que ahora tanto la sesión de scala como la python es la misma, y ahora lo veremos.
 
-5. Leemos la tabla "table" que creamos anteriormente en scala. Como comparten la sesion se puede acceder a ella desde python. Creamos una nueva columna y reemplazamos la vista:
+5. Leemos la tabla "table" que creamos anteriormente en scala. Como comparten la sesión se puede acceder a ella desde python. Creamos una nueva columna y reemplazamos la vista:
 
 ``` python
 df = spark.sql("SELECT * FROM table")
@@ -81,7 +81,7 @@ def slen(s: pd.Series) -> pd.Series:
 spark.udf.register("slen", slen)
 ```
 
-7. Al estar registrada esta última parte se puede hacer tanto en python como en scala, aunque nosotros la hemos hecho en python. Simplemente llamamos a la nueva funcion con Spark SQL y reemplazamos de nuevo la vista:
+7. Al estar registrada esta última parte se puede hacer tanto en python como en scala, aunque nosotros la hemos hecho en python. Simplemente llamamos a la nueva función con Spark SQL y reemplazamos de nuevo la vista:
 
 ``` python
 df_udf = spark.sql("SELECT language, users_count, len, slen(language) as udf_len FROM table")
