@@ -1,6 +1,8 @@
 ---
 layout: posts
 title: Curiosidades de las interfaces en go
+categories: 
+  - Golang
 ---
 
 Varias curiosidades sobre las interfaces en go.
