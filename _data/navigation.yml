@@ -2,3 +2,5 @@
 main:
   - title: "Categorias"
     url: /categories/
+  - title: "Fechas de publicación"
+    url: /year-archive/
