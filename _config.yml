@@ -116,11 +116,11 @@ author:
   avatar           : "/assets/images/photo.png"
   bio              : "Desarrollador"
   location         : "Andalucia/España"
-  email            :
+  email            : "carlosmartcarr@gmail.com"
   links:
     - label: "Email"
       icon: "fas fa-fw fa-envelope-square"
-      url: "carlosmartcarr@gmail.com"
+      # url: "carlosmartcarr@gmail.com"
     - label: "LinkedIn"
       icon: "fas fa-fw fa-linkedin"
       url: "https://www.linkedin.com/in/carlos-mart%C3%ADnez-carre%C3%B1o-3612a9b8/"
@@ -147,7 +147,7 @@ footer:
       icon: "fab fa-fw fa-bitbucket"
       # url:
     - label: "LinkedIn"
-      icon: "fab fa-fw fa-linkedin"
+      icon: "fab fa-brands fa-linkedin"
       # url: ""
 
 # Reading Files
