@@ -113,29 +113,20 @@ analytics:
 # Site Author
 author:
   name             : "Carlos Martínez"
-  avatar           : # path of avatar image, e.g. "/assets/images/bio-photo.jpg"
+  avatar           : "/assets/images/photo.png"
   bio              : "Desarrollador"
   location         : "Andalucia/España"
   email            :
   links:
     - label: "Email"
       icon: "fas fa-fw fa-envelope-square"
-      # url: "mailto:your.name@email.com"
-    - label: "Website"
-      icon: "fas fa-fw fa-link"
-      # url: "https://your-website.com"
-    - label: "Twitter"
-      icon: "fab fa-fw fa-twitter-square"
-      # url: "https://twitter.com/"
-    - label: "Facebook"
-      icon: "fab fa-fw fa-facebook-square"
-      # url: "https://facebook.com/"
+      url: "carlosmartcarr@gmail.com"
+    - label: "LinkedIn"
+      icon: "fas fa-fw fa-linkedIn"
+      url: "https://www.linkedin.com/in/carlos-mart%C3%ADnez-carre%C3%B1o-3612a9b8/"
     - label: "GitHub"
       icon: "fab fa-fw fa-github"
-      # url: "https://github.com/"
-    - label: "Instagram"
-      icon: "fab fa-fw fa-instagram"
-      # url: "https://instagram.com/"
+      url: "https://github.com/macwinux"
 
 # Site Footer
 footer:

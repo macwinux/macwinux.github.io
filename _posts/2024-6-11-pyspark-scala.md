@@ -3,8 +3,6 @@ layout: posts
 title: PySpark en Scala
 ---
 
-
-
 He querido comenzar este blog con una investigación que tuve que hacer durante un proyecto en el que trabaje. La dificultad radicaba en que queriamos hacer un producto sobre Spark que corriese codigo embebido sql, scala o python en un yaml.
 
 Casi toda la lógica se escribia en Spark SQL y cuando querias hacer algo más complejo se solía utilizar los UDFs de Scala.
