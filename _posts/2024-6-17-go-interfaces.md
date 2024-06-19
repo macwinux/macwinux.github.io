@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: posts
 title: Curiosidades de las interfaces en go
 ---
 
