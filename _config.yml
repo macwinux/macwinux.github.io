@@ -122,7 +122,7 @@ author:
       icon: "fas fa-fw fa-envelope-square"
       url: "carlosmartcarr@gmail.com"
     - label: "LinkedIn"
-      icon: "fas fa-fw fa-linkedIn"
+      icon: "fas fa-fw fa-linkedin"
       url: "https://www.linkedin.com/in/carlos-mart%C3%ADnez-carre%C3%B1o-3612a9b8/"
     - label: "GitHub"
       icon: "fab fa-fw fa-github"
@@ -146,9 +146,9 @@ footer:
     - label: "Bitbucket"
       icon: "fab fa-fw fa-bitbucket"
       # url:
-    - label: "Instagram"
-      icon: "fab fa-fw fa-instagram"
-      # url:
+    - label: "LinkedIn"
+      icon: "fab fa-fw fa-linkedin"
+      url: "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.stickpng.com%2Fimg%2Ficons-logos-emojis%2Fsocial-media-icons%2Flinkedin-icon-square&psig=AOvVaw2QcwBb3v5J7ZglIRSYUfu7&ust=1718871317023000&source=images&cd=vfe&opi=89978449&ved=0CBEQjRxqFwoTCPDZleSc54YDFQAAAAAdAAAAABAE"
 
 
 # Reading Files
