@@ -1,11 +1,11 @@
 ---
-title: PySpark en Scala
+title: "PySpark en Scala"
 categories: 
   - Spark
   - Scala
   - Python
 toc: true
-toc_label: "Índice"
+toc_label: "Indice"
 ---
 
 ## Presentación
@@ -21,7 +21,7 @@ Dentro de la carpeta main se puede ver que hay dos carpetas, la carpeta con el c
 
 Vamos a explicar el ciclo de procesamiento de los dos códigos por partes:
 
-### Parte de Scala
+## Parte de Scala
 
 1. El código de scala es bastante sencillo. Primero se definen ciertas variables mutables como el `JavaSparkContext` y el `SparkConf`. Se declaran asi en vez de inmutables porque luego se acceden a ellas con los metodos `getJsc()` y `getConf()`, que los necesitaremos en python, de ahi que se deba declarar todo fuera del main.
 
@@ -57,7 +57,7 @@ PythonRunner.main(Array(
     ))
 ```
 
-### Parte de Python
+## Parte de Python
 
 4. La parte de pyspark que busca la sesión activa por el código scala:
 
@@ -99,7 +99,7 @@ df_udf = spark.sql("SELECT language, users_count, len, slen(language) as udf_len
 df_udf.createOrReplaceTempView("table")
 ```
 
-### Comprobación
+## Comprobación
 
 8. Ahora la última parte del ejemplo es volver a hacer un select con scala para ver que la tabla contiene todos los cambios realizados con python:
 
