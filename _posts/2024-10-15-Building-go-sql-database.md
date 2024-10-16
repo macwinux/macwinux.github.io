@@ -23,85 +23,78 @@ Estos tokens son básicamente identifiers, numbers, strings y symbols.
 
 Lo primero que debemos hacer es definir los tipos y constantes que vamos a usar en el archivo `lexer.go`.
 
-<details>
-  <summary>tipos y constantes</summary>
+```go
+import (
+	"fmt"
+	"log/slog"
+	"strings"
+)
 
-  ### lexer.go
-  ```go
+// localizacion del token en el codigo
+type location struct {
+	line uint
+	col  uint
+}
 
-  import (
-  	"fmt"
-  	"log/slog"
-  	"strings"
-  )
+// para guardar las palabras clave reservadas de SQL
+type keyword string
 
-  // localizacion del token en el codigo
-  type location struct {
-  	line uint
-  	col  uint
-  }
+const (
+	selectKeyword keyword = "select"
+	fromKeyword   keyword = "from"
+	asKeyword     keyword = "as"
+	tableKeyword  keyword = "table"
+	createKeyword keyword = "create"
+	insertKeyword keyword = "insert"
+	intoKeyword   keyword = "into"
+	valuesKeyword keyword = "values"
+	intKeyword    keyword = "int"
+	textKeyword   keyword = "text"
+	whereKeyword  keyword = "where"
+	trueKeyword   keyword = "true"
+	falseKeyword  keyword = "false"
+	nullKeyword   keyword = "null"
+)
 
-  // para guardar las palabras clave reservadas de SQL
-  type keyword string
+// para guardar la sintaxis SQL
+type symbol string
 
-  const (
-  	selectKeyword keyword = "select"
-  	fromKeyword   keyword = "from"
-  	asKeyword     keyword = "as"
-  	tableKeyword  keyword = "table"
-  	createKeyword keyword = "create"
-  	insertKeyword keyword = "insert"
-  	intoKeyword   keyword = "into"
-  	valuesKeyword keyword = "values"
-  	intKeyword    keyword = "int"
-  	textKeyword   keyword = "text"
-  	whereKeyword  keyword = "where"
-  	trueKeyword   keyword = "true"
-  	falseKeyword  keyword = "false"
-  	nullKeyword   keyword = "null"
-  )
+const (
+	semicolonSymbol  symbol = ";"
+	asteriskSymbol   symbol = "*"
+	commaSymbol      symbol = ","
+	leftParenSymbol  symbol = "("
+	rightParenSymbol symbol = ")"
+)
 
-  // para guardar la sintaxis SQL
-  type symbol string
+type tokenKind uint
 
-  const (
-  	semicolonSymbol  symbol = ";"
-  	asteriskSymbol   symbol = "*"
-  	commaSymbol      symbol = ","
-  	leftParenSymbol  symbol = "("
-  	rightParenSymbol symbol = ")"
-  )
+const (
+	keywordKind tokenKind = iota
+	symbolKind
+	identifierKind
+	stringKind
+	numericKind
+	boolKind
+	nullKind
+)
 
-  type tokenKind uint
+type token struct {
+	value string
+	kind  tokenKind
+	loc   location
+}
 
-  const (
-  	keywordKind tokenKind = iota
-  	symbolKind
-  	identifierKind
-  	stringKind
-  	numericKind
-  	boolKind
-  	nullKind
-  )
+// indica la posicion actual del lexer
+type cursor struct {
+	pointer uint
+	loc     location
+}
 
-  type token struct {
-  	value string
-  	kind  tokenKind
-  	loc   location
-  }
+func (t *token) equals(other *token) bool {
+	return t.value == other.value && t.kind == other.kind
+}
 
-  // indica la posicion actual del lexer
-  type cursor struct {
-  	pointer uint
-  	loc     location
-  }
-
-  func (t *token) equals(other *token) bool {
-  	return t.value == other.value && t.kind == other.kind
-  }
-
-  type lexer func(string, cursor) (*token, cursor, bool)
-  ```
-
-</details>
+type lexer func(string, cursor) (*token, cursor, bool)
+```
 
