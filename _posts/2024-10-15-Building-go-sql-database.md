@@ -24,9 +24,10 @@ Estos tokens son básicamente identifiers, numbers, strings y symbols.
 Lo primero que debemos hacer es definir los tipos y constantes que vamos a usar en el archivo `lexer.go`.
 
 <details>
-  <summary>lexer.go</summary>
+  <summary>tipos y constantes</summary>
 
-  ``` go
+  ### lexer.go
+  ```go
 
   import (
   	"fmt"
@@ -100,7 +101,6 @@ Lo primero que debemos hacer es definir los tipos y constantes que vamos a usar 
   }
 
   type lexer func(string, cursor) (*token, cursor, bool)
-
   ```
 
 </details>
